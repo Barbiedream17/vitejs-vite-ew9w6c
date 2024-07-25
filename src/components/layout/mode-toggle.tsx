@@ -1,41 +1,38 @@
-import * as React from "react"
-import { useTheme } from "@/hooks/use-theme" // Create this custom hook for theme management
-
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Icons } from "@/components/shared/icons"
+import { useState } from 'react';
+import { Menu, Button, useMantineColorScheme } from '@mantine/core';
+import { IconSun, IconMoon, IconDeviceLaptop } from '@tabler/icons-react';
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const [opened, setOpened] = useState(false);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="size-8 px-0">
-          <Icons.sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Icons.moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
+    <Menu opened={opened} onChange={setOpened}>
+      <Menu.Target>
+        <Button variant="subtle" size="sm" px={0} w={32} h={32}>
+          {colorScheme === 'dark' ? <IconMoon size={16} /> : <IconSun size={16} />}
         </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Icons.sun className="mr-2 size-4" />
-          <span>Light</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Icons.moon className="mr-2 size-4" />
-          <span>Dark</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Icons.laptop className="mr-2 size-4" />
-          <span>System</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+      </Menu.Target>
+      <Menu.Dropdown>
+        <Menu.Item 
+          icon={<IconSun size={14} />} 
+          onClick={() => setColorScheme('light')}
+        >
+          Light
+        </Menu.Item>
+        <Menu.Item 
+          icon={<IconMoon size={14} />} 
+          onClick={() => setColorScheme('dark')}
+        >
+          Dark
+        </Menu.Item>
+        <Menu.Item 
+          icon={<IconDeviceLaptop size={14} />} 
+          onClick={() => setColorScheme('auto')}
+        >
+          System
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
+  );
 }

@@ -1,17 +1,10 @@
-import { Menu, MenuProps, MenuItemProps, MenuDropdownProps } from '@mantine/core';
+import { ReactNode } from 'react';
+import { Menu } from '@mantine/core';
 
-export function NavigationMenu(props: MenuProps) {
-  return <Menu {...props} />;
+interface NavigationMenuProps {
+  children: ReactNode;
 }
 
-export const NavigationMenuList = Menu.Dropdown;
-export const NavigationMenuItem = Menu.Item;
-export const NavigationMenuTrigger = Menu.Target;
-export const NavigationMenuContent = Menu.Dropdown;
-
-export function NavigationMenuLink({ children, ...props }: MenuItemProps) {
-  return <Menu.Item {...props}>{children}</Menu.Item>;
+export function NavigationMenu({ children }: NavigationMenuProps) {
+  return <Menu>{children}</Menu>;
 }
-
-// Mantine's Menu doesn't have direct equivalents for Viewport and Indicator
-// You may need to create custom components if these are necessary for your use case

@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
-import { notifications, NotificationProps } from '@mantine/notifications';
+import { showNotification, NotificationsProps } from '@mantine/notifications';
 
 type ToasterProps = {
-  toasts: NotificationProps[];
+  toasts: Array<NotificationsProps & { message: string }>;
 };
 
 export function Toaster({ toasts }: ToasterProps) {
   useEffect(() => {
     toasts.forEach((toast) => {
-      notifications.show(toast);
+      showNotification({
+        title: toast.title || 'Notification',
+        message: toast.message,
+        color: toast.color || 'blue',
+      });
     });
   }, [toasts]);
 

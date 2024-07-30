@@ -1,24 +1,18 @@
-import React from 'react';
 import { Stack } from '@mantine/core';
-import { infos } from "@/config/landing";
-import BentoGrid from "@/components/sections/bentogrid";
-import Features from "@/components/sections/features";
-import HeroLanding from "@/components/sections/hero-landing";
-import InfoLanding from "@/components/sections/info-landing";
-import Powered from "@/components/sections/powered";
-import PreviewLanding from "@/components/sections/preview-landing";
-import Testimonials from "@/components/sections/testimonials";
+import { HeroLanding } from "@/components/sections/hero-landing";
+import { Testimonials } from "@/components/sections/testimonials";
 
 export function MarketingPage() {
+  // Sample testimonials data
+  const testimonials = [
+    { name: "John Doe", text: "This product is amazing!" },
+    { name: "Jane Smith", text: "I can't imagine working without it now." }
+  ];
+
   return (
-    <Stack spacing={0}>
+    <Stack>
       <HeroLanding />
-      <PreviewLanding />
-      <Powered />
-      <BentoGrid />
-      <InfoLanding data={infos[0]} reverse={true} />
-      <Features />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
     </Stack>
   );
 }

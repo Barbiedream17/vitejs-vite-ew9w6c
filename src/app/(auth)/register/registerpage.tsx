@@ -1,8 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Title, Text, Button, Grid, Paper } from '@mantine/core';
-
-import { UserAuthForm } from "@/components/forms/user-auth-form";
+import { Container, Title, Text, Button, Grid, Paper, Stack } from '@mantine/core';
+import UserAuthForm from "@/components/forms/user-auth-form";
 import { Icons } from "@/components/shared/icons";
 
 export function RegisterPage() {
@@ -21,14 +19,14 @@ export function RegisterPage() {
         <Grid.Col span={6} className="flex items-center justify-center">
           <Paper shadow="xs" p="md" withBorder>
             <Container size="xs">
-              <Stack align="center" spacing="md">
+              <Stack align="center">
                 <Icons.logo className="size-6" />
                 <Title order={2}>Create an account</Title>
-                <Text size="sm" color="dimmed">
+                <Text size="sm" c="dimmed">
                   Enter your email below to create your account
                 </Text>
-                <UserAuthForm type="register" />
-                <Text size="xs" color="dimmed" align="center">
+                <UserAuthForm />
+                <Text size="xs" c="dimmed" ta="center">
                   By clicking continue, you agree to our{' '}
                   <Link to="/terms" className="hover:text-brand underline underline-offset-4">
                     Terms of Service

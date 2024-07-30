@@ -1,43 +1,20 @@
-mport React from 'react';
-import { Button } from '@mantine/core';
-import { Icons } from './icons';
-import { cn } from '@/lib/utils'; // Correct import path
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Clipboard } from 'lucide-react';
 
-interface CopyButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  value: string;
+interface CopyButtonProps {
+  textToCopy: string;
 }
 
-export function CopyButton({ value, className, ...props }: CopyButtonProps) {
-  const [hasCopied, setHasCopied] = React.useState(false);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setHasCopied(false);
-    }, 2000);
-  }, [hasCopied]);
-
-  const handleCopyValue = (value: string) => {
-    navigator.clipboard.writeText(value);
-    setHasCopied(true);
+export const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy }) => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(textToCopy);
+    alert('Text copied to clipboard!');
   };
 
   return (
-    <Button
-      size="sm"
-      variant="ghost"
-      className={cn(
-        'z-10 size-[30px] border border-white/25 bg-zinc-900 p-1.5 text-primary-foreground hover:text-foreground dark:text-foreground',
-        className,
-      )}
-      onClick={() => handleCopyValue(value)}
-      {...props}
-    >
-      <span className="sr-only">Copy</span>
-      {hasCopied ? (
-        <Icons.check className="size-4" />
-      ) : (
-        <Icons.copy className="size-4" />
-      )}
+    <Button onClick={handleCopy} leftIcon={<Clipboard />}>
+      Copy
     </Button>
   );
-}
+};

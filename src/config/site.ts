@@ -1,4 +1,4 @@
-import { SidebarNavItem, SiteConfig } from "./types";
+import { SidebarNavItem, SiteConfig } from "@/types/types";
 
 const site_url = import.meta.env.VITE_APP_URL;
 

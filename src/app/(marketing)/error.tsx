@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Container, Title, Center } from '@mantine/core';
 
 interface ErrorPageProps {

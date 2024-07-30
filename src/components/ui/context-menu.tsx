@@ -1,24 +1,14 @@
-import { Menu, MenuProps } from "@mantine/core";
-import { IconChevronRight } from "@tabler/icons-react";
+import { Menu, MenuItem, MenuDropdown } from '@mantine/core';
 
-export const ContextMenu = Menu;
-export const ContextMenuTrigger = Menu.Target;
-export const ContextMenuContent = Menu.Dropdown;
-export const ContextMenuItem = Menu.Item;
-export const ContextMenuCheckboxItem = Menu.Item;
-export const ContextMenuRadioItem = Menu.Item;
-export const ContextMenuLabel = Menu.Label;
-export const ContextMenuSeparator = Menu.Divider;
-export const ContextMenuShortcut = ({ className, ...props }: React.ComponentProps<"span">) => (
-  <span className={className} {...props} />
+export const ContextMenu = () => (
+  <Menu>
+    <Menu.Target>
+      <button>Open Menu</button>
+    </Menu.Target>
+    <MenuDropdown>
+      <MenuItem>Option 1</MenuItem>
+      <MenuItem>Option 2</MenuItem>
+      <MenuItem>Option 3</MenuItem>
+    </MenuDropdown>
+  </Menu>
 );
-export const ContextMenuGroup = Menu.Label;
-export const ContextMenuPortal = Menu;
-export const ContextMenuSub = Menu;
-export const ContextMenuSubContent = Menu.Dropdown;
-export const ContextMenuSubTrigger = ({ children, ...props }: MenuProps) => (
-  <Menu.Item rightSection={<IconChevronRight size={14} />} {...props}>
-    {children}
-  </Menu.Item>
-);
-export const ContextMenuRadioGroup = Menu;

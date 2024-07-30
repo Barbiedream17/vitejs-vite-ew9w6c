@@ -16,7 +16,7 @@ export function BillingFormButton({
   offer,
   subscriptionPlan,
 }: BillingFormButtonProps) {
-  let [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const generateUserStripeSession = generateUserStripe.bind(
     null,
     offer.stripeIds[year ? "yearly" : "monthly"],

@@ -27,7 +27,9 @@ const PricingCard: React.FC<{ plan: Plan; onSubscribe: () => void }> = ({ plan, 
       </ul>
     </CardContent>
     <CardFooter>
-      <Button onClick={onSubscribe}>Subscribe</Button>
+      <Button onClick={onSubscribe} variant="default">
+        Subscribe
+      </Button>
     </CardFooter>
   </Card>
 );

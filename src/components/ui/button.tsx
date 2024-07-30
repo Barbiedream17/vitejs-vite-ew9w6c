@@ -3,10 +3,12 @@ import { Button as MantineButton, ButtonProps as MantineButtonProps } from '@man
 
 export interface ButtonProps extends MantineButtonProps {
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'disable';
+  leftIcon?: React.ReactNode; // Define leftIcon prop
+  onClick?: () => void; // Define onClick prop
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'default', size = 'sm', ...props }, ref) => {
+  ({ variant = 'default', size = 'sm', leftIcon, onClick, ...props }, ref) => {
     const getVariant = (): MantineButtonProps['variant'] => {
       switch (variant) {
         case 'destructive': return 'filled';
@@ -25,6 +27,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         variant={getVariant()}
         size={size}
         disabled={variant === 'disable'}
+        leftSection={leftIcon} // Use leftSection instead of leftIcon
+        onClick={onClick}
         {...props}
       />
     );

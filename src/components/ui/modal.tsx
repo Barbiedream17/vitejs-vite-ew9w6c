@@ -5,8 +5,8 @@ import { useMediaQuery } from "@mantine/hooks";
 interface ModalProps {
   children: React.ReactNode;
   className?: string;
-  showModal?: boolean;
-  setShowModal?: Dispatch<SetStateAction<boolean>>;
+  showModal: boolean; // ensure showModal is always boolean
+  setShowModal: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
   desktopOnly?: boolean;
   preventDefaultClose?: boolean;
@@ -26,16 +26,15 @@ export function Modal({
       return;
     }
     onClose && onClose();
-    if (setShowModal) {
-      setShowModal(false);
-    }
+    setShowModal(false);
   };
+
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   if (isMobile && !desktopOnly) {
     return (
       <Drawer
-        opened={setShowModal ? showModal : true}
+        opened={showModal}
         onClose={() => closeModal({ dragged: true })}
         position="bottom"
         size="100%"
@@ -45,9 +44,10 @@ export function Modal({
       </Drawer>
     );
   }
+
   return (
     <MantineModal
-      opened={setShowModal ? showModal : true}
+      opened={showModal}
       onClose={() => closeModal()}
       centered
       className={className}

@@ -1,4 +1,4 @@
-import { SubscriptionPlan, PlansRow } from "./types";
+import { SubscriptionPlan, PlansRow } from "@/types/types";
 
 export const pricingData: SubscriptionPlan[] = [
   {

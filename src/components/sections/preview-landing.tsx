@@ -1,49 +1,26 @@
-import { Box, Container, Image } from '@mantine/core';
+import React from 'react';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
-export default function PreviewLanding() {
+const PreviewLanding = () => {
   return (
-    <Box pb={{ base: 'md', sm: 'xl' }}>
-      <Container>
-        <Box
-          sx={(theme) => ({
-            borderRadius: theme.radius.xl,
-            [theme.fn.largerThan('md')]: {
-              backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-              padding: '14px',
-              border: `1px solid ${
-                theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-              }`,
-            },
-          })}
-        >
-          <Box
-            sx={(theme) => ({
-              position: 'relative',
-              aspectRatio: '16 / 9',
-              overflow: 'hidden',
-              borderRadius: theme.radius.md,
-              border: `1px solid ${
-                theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-              }`,
-            })}
-          >
-            <Image
-              src="/_static/blog/blog-post-3.jpg"
-              alt="preview landing"
-              fit="cover"
-              width="100%"
-              height="100%"
-              sx={(theme) => ({
-                objectPosition: 'center',
-                ...(theme.colorScheme === 'dark' && {
-                  opacity: 0.85,
-                  filter: 'invert(1)',
-                }),
-              })}
-            />
-          </Box>
-        </Box>
-      </Container>
-    </Box>
+    <Card>
+      <CardHeader>
+        <CardTitle>Preview Your Landing Page</CardTitle>
+        <CardDescription>
+          This is how your landing page will look like. Make sure everything is perfect.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Content of the landing page goes here...</p>
+      </CardContent>
+      <CardFooter>
+        <Button variant="default" onClick={() => alert('Previewing...')}>
+          Preview
+        </Button>
+      </CardFooter>
+    </Card>
   );
-}
+};
+
+export default PreviewLanding;

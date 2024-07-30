@@ -1,4 +1,3 @@
-import React from 'react';
 import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from '@mantine/core';
 
 export interface BadgeProps extends MantineBadgeProps {

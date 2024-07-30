@@ -1,10 +1,21 @@
 import React from 'react';
-import { DatePicker, DatePickerProps } from '@mantine/dates';
+import { DatePicker as MantineDatePicker, DatePickerProps as MantineDatePickerProps } from '@mantine/dates';
 
-export type CalendarProps = DatePickerProps;
+type CalendarProps = MantineDatePickerProps
 
-export function Calendar({ className, ...props }: CalendarProps) {
-  return <DatePicker {...props} className={className} />;
-}
+const Calendar: React.FC<CalendarProps> = (props) => {
+  return (
+    <MantineDatePicker
+      {...props}
+      onChange={(value) => {
+        if (Array.isArray(value)) {
+          // Handle array values
+        } else {
+          // Handle single value
+        }
+      }}
+    />
+  );
+};
 
-Calendar.displayName = 'Calendar';
+export default Calendar;

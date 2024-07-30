@@ -1,20 +1,25 @@
 import React from 'react';
-import { Accordion, AccordionItem } from '@/components/ui/accordion';
+import { CustomAccordion } from '@/components/ui/Accordion';
+
+const faqItems = [
+  {
+    label: 'What is your refund policy?',
+    content: 'If you are not satisfied with your purchase, you can request a refund within 30 days of the purchase date.'
+  },
+  {
+    label: 'How do I upgrade my subscription?',
+    content: 'You can upgrade your subscription by visiting your account settings and selecting a new plan.'
+  },
+  {
+    label: 'Can I cancel my subscription at any time?',
+    content: 'Yes, you can cancel your subscription at any time through your account settings.'
+  }
+];
 
 const PricingFAQ: React.FC = () => (
-  <div className="pricing-faq p-4 bg-white shadow-md rounded-lg">
-    <h2>Frequently Asked Questions</h2>
-    <Accordion>
-      <AccordionItem label="What payment methods do you accept?">
-        We accept all major credit cards.
-      </AccordionItem>
-      <AccordionItem label="Can I cancel my subscription?">
-        Yes, you can cancel your subscription at any time.
-      </AccordionItem>
-      <AccordionItem label="Do you offer refunds?">
-        Refunds are provided within the first 30 days of subscription.
-      </AccordionItem>
-    </Accordion>
+  <div className="pricing-faq">
+    <h2 className="text-xl font-bold mb-4">Frequently Asked Questions</h2>
+    <CustomAccordion items={faqItems} />
   </div>
 );
 

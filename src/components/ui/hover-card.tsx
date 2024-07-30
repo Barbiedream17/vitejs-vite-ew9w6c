@@ -1,13 +1,18 @@
-import { HoverCard as MantineHoverCard } from "@mantine/core";
+import { ReactNode, forwardRef } from 'react';
+import { HoverCard as MantineHoverCard, HoverCardProps } from '@mantine/core';
 
-export function HoverCard({ children, ...props }) {
-  return <MantineHoverCard {...props}>{children}</MantineHoverCard>;
+interface CustomHoverCardProps extends Omit<HoverCardProps, 'children'> {
+  children: ReactNode;
 }
 
-export function HoverCardTrigger({ children, ...props }) {
-  return <MantineHoverCard.Target {...props}>{children}</MantineHoverCard.Target>;
-}
+const CustomHoverCard = forwardRef<HTMLDivElement, CustomHoverCardProps>(
+  ({ children, ...props }) => (
+    <MantineHoverCard {...props}>
+      {children}
+    </MantineHoverCard>
+  )
+);
 
-export function HoverCardContent({ children, ...props }) {
-  return <MantineHoverCard.Dropdown {...props}>{children}</MantineHoverCard.Dropdown>;
-}
+CustomHoverCard.displayName = 'CustomHoverCard';
+
+export { CustomHoverCard as HoverCard };

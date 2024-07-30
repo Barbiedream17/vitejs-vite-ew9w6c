@@ -1,18 +1,17 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { footerLinks, siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/layout/mode-toggle";
+const SiteFooter: React.FC = () => (
+  <footer className="site-footer bg-gray-800 text-white p-4">
+    <div className="container mx-auto">
+      <p>© 2024 Your Company. All rights reserved.</p>
+      <nav>
+        <Link to="/privacy-policy" className="text-white">Privacy Policy</Link>
+        {' | '}
+        <Link to="/terms-of-service" className="text-white">Terms of Service</Link>
+      </nav>
+    </div>
+  </footer>
+);
 
-import { NewsletterForm } from "../forms/newsletter-form";
-import { Icons } from "../shared/icons";
-
-export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
-  return (
-    <footer className={cn("border-t", className)}>
-      {/* Footer content */}
-      {/* ... (keep the existing footer content, replacing Next.js Link with React Router Link) */}
-    </footer>
-  );
-}
+export default SiteFooter;

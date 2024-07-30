@@ -1,10 +1,27 @@
-import { Users } from "lucide-react"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import React from 'react';
+import { Users } from "lucide-react";
+
+// Define props for Card components
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const Card: React.FC<CardProps> = ({ children, className }) => (
+  <div className={className}>{children}</div>
+);
+
+const CardHeader: React.FC<CardProps> = ({ children, className }) => (
+  <div className={className}>{children}</div>
+);
+
+const CardTitle: React.FC<CardProps> = ({ children, className }) => (
+  <h3 className={className}>{children}</h3>
+);
+
+const CardContent: React.FC<CardProps> = ({ children, className }) => (
+  <div className={className}>{children}</div>
+);
 
 export default function InfoCard() {
   return (
@@ -18,5 +35,5 @@ export default function InfoCard() {
         <p className="text-xs text-muted-foreground">+180.1% from last month</p>
       </CardContent>
     </Card>
-  )
+  );
 }

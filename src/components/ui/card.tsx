@@ -1,26 +1,30 @@
 import React from 'react';
 import { Paper, Box, Title, Text } from '@mantine/core';
 
-export const Card = ({ className, ...props }: React.ComponentProps<typeof Paper>) => (
+interface ClassNameProps {
+  className?: string;
+}
+
+export const Card: React.FC<ClassNameProps & React.ComponentProps<typeof Paper>> = ({ className, ...props }) => (
   <Paper shadow="sm" p="md" {...props} className={className} />
 );
 
-export const CardHeader = ({ className, ...props }: React.ComponentProps<typeof Box>) => (
+export const CardHeader: React.FC<ClassNameProps & React.ComponentProps<typeof Box>> = ({ className, ...props }) => (
   <Box mb="md" {...props} className={className} />
 );
 
-export const CardTitle = ({ className, ...props }: React.ComponentProps<typeof Title>) => (
+export const CardTitle: React.FC<ClassNameProps & React.ComponentProps<typeof Title>> = ({ className, ...props }) => (
   <Title order={3} {...props} className={className} />
 );
 
-export const CardDescription = ({ className, ...props }: React.ComponentProps<typeof Text>) => (
+export const CardDescription: React.FC<ClassNameProps & React.ComponentProps<typeof Text>> = ({ className, ...props }) => (
   <Text size="sm" color="dimmed" {...props} className={className} />
 );
 
-export const CardContent = ({ className, ...props }: React.ComponentProps<typeof Box>) => (
+export const CardContent: React.FC<ClassNameProps & React.ComponentProps<typeof Box>> = ({ className, ...props }) => (
   <Box {...props} className={className} />
 );
 
-export const CardFooter = ({ className, ...props }: React.ComponentProps<typeof Box>) => (
+export const CardFooter: React.FC<ClassNameProps & React.ComponentProps<typeof Box>> = ({ className, ...props }) => (
   <Box mt="md" {...props} className={className} />
 );

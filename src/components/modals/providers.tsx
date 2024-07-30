@@ -1,23 +1,14 @@
-import React, { createContext, ReactNode, useState } from "react";
-import { useSignInModal } from "@/components/modals/sign-in-modal";
+import React, { ReactNode } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-export const ModalContext = createContext<{
-  setShowSignInModal: React.Dispatch<React.SetStateAction<boolean>>;
-}>({
-  setShowSignInModal: () => {},
-});
+const queryClient = new QueryClient();
 
-export default function ModalProvider({ children }: { children: ReactNode }) {
-  const { SignInModal, setShowSignInModal } = useSignInModal();
+const Providers: React.FC<{ children: ReactNode }> = ({ children }) => (
+  <QueryClientProvider client={queryClient}>
+    {children}
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
+);
 
-  return (
-    <ModalContext.Provider
-      value={{
-        setShowSignInModal,
-      }}
-    >
-      <SignInModal />
-      {children}
-    </ModalContext.Provider>
-  );
-}
+export default Providers;

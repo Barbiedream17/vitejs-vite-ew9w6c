@@ -1,38 +1,21 @@
-import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import React from 'react';
+import { Accordion, AccordionItem } from '@/components/ui/accordion';
 
-import { HeaderSection } from "../shared/header-section";
+const PricingFAQ: React.FC = () => (
+  <div className="pricing-faq p-4 bg-white shadow-md rounded-lg">
+    <h2>Frequently Asked Questions</h2>
+    <Accordion>
+      <AccordionItem label="What payment methods do you accept?">
+        We accept all major credit cards.
+      </AccordionItem>
+      <AccordionItem label="Can I cancel my subscription?">
+        Yes, you can cancel your subscription at any time.
+      </AccordionItem>
+      <AccordionItem label="Do you offer refunds?">
+        Refunds are provided within the first 30 days of subscription.
+      </AccordionItem>
+    </Accordion>
+  </div>
+);
 
-const pricingFaqData = [
-  // ... FAQ data
-];
-
-export function PricingFaq() {
-  return (
-    <section className="container max-w-4xl py-2">
-      <HeaderSection
-        label="FAQ"
-        title="Frequently Asked Questions"
-        subtitle="Explore our comprehensive FAQ to find quick answers to common
-          inquiries. If you need further assistance, don't hesitate to
-          contact us for personalized help."
-      />
-
-      <Accordion type="single" collapsible className="my-12 w-full">
-        {pricingFaqData.map((faqItem) => (
-          <AccordionItem key={faqItem.id} value={faqItem.id}>
-            <AccordionTrigger>{faqItem.question}</AccordionTrigger>
-            <AccordionContent className="text-sm text-muted-foreground sm:text-[15px]">
-              {faqItem.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </section>
-  );
-}
+export default PricingFAQ;

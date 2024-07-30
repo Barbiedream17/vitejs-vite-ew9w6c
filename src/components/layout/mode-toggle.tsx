@@ -1,33 +1,35 @@
-import { useState } from 'react';
-import { Menu, Button, useMantineColorScheme } from '@mantine/core';
+import React from 'react';
+import { Menu, Button } from '@mantine/core';
 import { IconSun, IconMoon, IconDeviceLaptop } from '@tabler/icons-react';
 
-export function ModeToggle() {
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
-  const [opened, setOpened] = useState(false);
+const ModeToggle: React.FC = () => {
+  const setColorScheme = (scheme: 'light' | 'dark' | 'auto') => {
+    console.log(`Color scheme set to: ${scheme}`);
+    // Implement your color scheme logic here
+  };
 
   return (
-    <Menu opened={opened} onChange={setOpened}>
+    <Menu>
       <Menu.Target>
         <Button variant="subtle" size="sm" px={0} w={32} h={32}>
-          {colorScheme === 'dark' ? <IconMoon size={16} /> : <IconSun size={16} />}
+          <IconSun size={16} />
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item 
-          icon={<IconSun size={14} />} 
+          leftSection={<IconSun size={14} />} 
           onClick={() => setColorScheme('light')}
         >
           Light
         </Menu.Item>
         <Menu.Item 
-          icon={<IconMoon size={14} />} 
+          leftSection={<IconMoon size={14} />} 
           onClick={() => setColorScheme('dark')}
         >
           Dark
         </Menu.Item>
         <Menu.Item 
-          icon={<IconDeviceLaptop size={14} />} 
+          leftSection={<IconDeviceLaptop size={14} />} 
           onClick={() => setColorScheme('auto')}
         >
           System
@@ -35,4 +37,6 @@ export function ModeToggle() {
       </Menu.Dropdown>
     </Menu>
   );
-}
+};
+
+export default ModeToggle;

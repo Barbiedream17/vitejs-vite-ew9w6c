@@ -1,58 +1,51 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { UserSubscriptionPlan } from "@/types";
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Check } from 'lucide-react';
+import { siteConfig } from '@/config/site';
 
-import { SubscriptionPlan } from "@/types/index";
-import { pricingData } from "@/config/subscriptions";
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { BillingFormButton } from "@/components/forms/billing-form-button";
-import { ModalContext } from "@/components/modals/providers";
-import { HeaderSection } from "@/components/shared/header-section";
-import { Icons } from "@/components/shared/icons";
-import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
-
-interface PricingCardsProps {
-  userId?: string;
-  subscriptionPlan?: UserSubscriptionPlan;
+interface Plan {
+  name: string;
+  price: string;
+  features: string[];
 }
 
-export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
-  const isYearlyDefault =
-    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year"
-      ? true
-      : false;
-  const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
-  const { setShowSignInModal } = useContext(ModalContext);
+const PricingCard: React.FC<{ plan: Plan; onSubscribe: () => void }> = ({ plan, onSubscribe }) => (
+  <Card className="shadow-sm p-lg">
+    <CardHeader>
+      <CardTitle>{plan.name}</CardTitle>
+      <p>{plan.price}</p>
+    </CardHeader>
+    <CardContent>
+      <ul>
+        {plan.features.map((feature, index) => (
+          <li key={index} className="flex items-center">
+            <Check className="mr-2 text-green-500" />
+            {feature}
+          </li>
+        ))}
+      </ul>
+    </CardContent>
+    <CardFooter>
+      <Button onClick={onSubscribe}>Subscribe</Button>
+    </CardFooter>
+  </Card>
+);
 
-  const toggleBilling = () => {
-    setIsYearly(!isYearly);
-  };
-
-  const PricingCard = ({ offer }: { offer: SubscriptionPlan }) => {
-    return (
-      <div
-        className={cn(
-          "relative flex flex-col overflow-hidden rounded-3xl border shadow-sm",
-          offer.title.toLocaleLowerCase() === "pro"
-            ? "-m-0.5 border-2 border-purple-400"
-            : "",
-        )}
-        key={offer.title}
-      >
-        {/* Card content */}
-      </div>
-    );
-  };
+const PricingCards: React.FC = () => {
+  const plans: Plan[] = siteConfig.plans;
 
   return (
-    <MaxWidthWrapper>
-      <section className="flex flex-col items-center text-center">
-        <HeaderSection label="Pricing" title="Start at full speed !" />
-
-        {/* Pricing toggle and cards */}
-      </section>
-    </MaxWidthWrapper>
+    <div className="pricing-cards grid grid-cols-1 md:grid-cols-3 gap-4">
+      {plans.map((plan) => (
+        <PricingCard
+          key={plan.name}
+          plan={plan}
+          onSubscribe={() => alert(`Subscribed to ${plan.name}`)}
+        />
+      ))}
+    </div>
   );
-}
+};
+
+export default PricingCards;

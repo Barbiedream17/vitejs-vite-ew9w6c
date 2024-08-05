@@ -1,20 +1,22 @@
-import { useEffect } from 'react';
-import { notifications } from '@mantine/notifications';
-import { useToast } from '@/hooks/use-toast'; // You'll need to adapt this hook
+import React from 'react';
+import { useToast } from '@/hooks/use-toast'; // Ensure this path is correct
+import { Notification } from '@mantine/core';
 
-export function Toaster() {
-  const { toasts } = useToast();
+const Toaster: React.FC = () => {
+  const { toasts, dismissToast } = useToast();
 
-  useEffect(() => {
-    toasts.forEach(({ id, title, description, ...props }) => {
-      notifications.show({
-        id,
-        title,
-        message: description,
-        ...props,
-      });
-    });
-  }, [toasts]);
+  return (
+    <div>
+      {toasts.map(({ id, title, description }: { id: string, title: string, description: string }) => (
+        <Notification key={id} onClose={() => dismissToast(id)}>
+          <div>
+            <h4>{title}</h4>
+            <p>{description}</p>
+          </div>
+        </Notification>
+      ))}
+    </div>
+  );
+};
 
-  return null; // Mantine's notifications don't require a component to be rendered
-}
+export default Toaster;

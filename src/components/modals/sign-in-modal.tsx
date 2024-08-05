@@ -1,50 +1,42 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Modal, Button } from '@mantine/core';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner'; // Assuming you use the sonner library for toasts
+import { Button, TextInput, Alert } from '@mantine/core';
 
-// Define the schema using zod
-const signInSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
+const schema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters long"),
 });
 
-const SignInModal: React.FC<{ opened: boolean; onClose: () => void }> = ({ opened, onClose }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(signInSchema),
+type FormData = z.infer<typeof schema>;
+
+export const SignInModal: React.FC = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema)
   });
 
-  const onSubmit = () => {
-    // Handle form submission
-    toast.success('Sign in successful!');
+  const onSubmit = (data: FormData) => {
+    console.log(data);
   };
 
   return (
-    <Modal opened={opened} onClose={onClose} title="Sign In">
-      <form onSubmit={handleSubmit(onSubmit)} className="sign-in-form p-4">
-        <Input
-          type="email"
-          {...register('email')}
-          placeholder="Enter your email"
-          className="w-full p-2 border rounded mb-2"
-        />
-        {errors.email && <p className="text-red-500">{errors.email.message?.toString()}</p>}
-        <Input
-          type="password"
-          {...register('password')}
-          placeholder="Enter your password"
-          className="w-full p-2 border rounded mb-2"
-        />
-        {errors.password && <p className="text-red-500">{errors.password.message?.toString()}</p>}
-        <Button type="submit" className="rounded bg-blue-500 text-white">
-          Sign In
-        </Button>
-      </form>
-    </Modal>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <TextInput
+        {...register('email')}
+        placeholder="Enter your email"
+        label="Email"
+        className="w-full"
+      />
+      {errors.email && <Alert color="red">{errors.email?.message}</Alert>}
+      <TextInput
+        {...register('password')}
+        placeholder="Enter your password"
+        label="Password"
+        type="password"
+        className="w-full"
+      />
+      {errors.password && <Alert color="red">{errors.password?.message}</Alert>}
+      <Button type="submit" className="w-full">Sign In</Button>
+    </form>
   );
 };
-
-export default SignInModal;

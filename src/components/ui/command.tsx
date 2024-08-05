@@ -1,25 +1,35 @@
-import React from "react";
-import { Autocomplete, Box, Modal, Text } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
+import React from 'react';
+import { TextInput, Box, List, ListItem, Text } from '@mantine/core';
+import { ScanSearch } from 'lucide-react';
 
-export const Command = Autocomplete;
+export const Command: React.FC = () => {
+  const [searchTerm, setSearchTerm] = React.useState('');
 
-export const CommandDialog = Modal;
+  const items = ['Item 1', 'Item 2', 'Item 3'].filter(item =>
+    item.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-export const CommandInput = Autocomplete;
-
-export const CommandList = Box;
-
-export const CommandEmpty = Text;
-
-export const CommandGroup = Box;
-
-export const CommandSeparator = ({ className, ...props }: React.ComponentProps<"hr">) => (
-  <hr className={className} {...props} />
-);
-
-export const CommandItem = Autocomplete.Item;
-
-export const CommandShortcut = ({ className, ...props }: React.ComponentProps<"span">) => (
-  <span className={className} {...props} />
-);
+  return (
+    <Box>
+      <TextInput
+        leftSection={<ScanSearch />}
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.currentTarget.value)}
+      />
+      <List>
+        {items.length > 0 ? (
+          items.map((item, index) => (
+            <ListItem key={index}>
+              <Text>{item}</Text>
+            </ListItem>
+          ))
+        ) : (
+          <ListItem>
+            <Text>No results found.</Text>
+          </ListItem>
+        )}
+      </List>
+    </Box>
+  );
+};

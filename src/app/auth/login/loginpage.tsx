@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Container, Title, Text, Button, Stack } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
 
-import UserAuthForm from "@/components/forms/user-auth-form";
+import { UserAuthForm } from "@/components/forms/user-auth-form";
 import { Icons } from "@/components/shared/icons";
 
 export function LoginPage() {

@@ -1,9 +1,7 @@
-import React from 'react';
-import { Avatar as MantineAvatar, AvatarProps } from '@mantine/core';
+import { Avatar as MantineAvatar, AvatarProps as MantineAvatarProps } from '@mantine/core';
 
-export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  (props, ref) => <MantineAvatar ref={ref} {...props} />
-);
+export interface AvatarProps extends MantineAvatarProps {}
 
-export const AvatarImage = MantineAvatar.Image;
-export const AvatarFallback = MantineAvatar.Placeholder;
+export const Avatar: React.FC<AvatarProps> = (props) => {
+  return <MantineAvatar {...props} />;
+};

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Container, Title, Text, Button, Grid, Paper, Stack } from '@mantine/core';
-import UserAuthForm from "@/components/forms/user-auth-form";
+import { UserAuthForm } from "@/components/forms/user-auth-form";
 import { Icons } from "@/components/shared/icons";
 
 export function RegisterPage() {

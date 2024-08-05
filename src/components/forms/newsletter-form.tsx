@@ -1,40 +1,34 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button, TextInput, Alert } from '@mantine/core';
 import { toast } from 'sonner';
 
-// Define the schema using zod
-const newsletterSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
+const schema = z.object({
+  email: z.string().email("Invalid email address"),
 });
 
-const NewsletterForm: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(newsletterSchema),
+type FormData = z.infer<typeof schema>;
+
+export const NewsletterForm: React.FC = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema)
   });
 
-  const onSubmit = () => {
-    // Handle form submission
-    toast.success('Subscription successful!');
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+    toast.success("Subscription successful");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="newsletter-form p-4 bg-white shadow-md rounded-lg">
-      <Input
-        type="email"
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <TextInput
         {...register('email')}
         placeholder="Enter your email"
-        className="w-full p-2 border rounded mb-2"
+        label="Email"
       />
-      {errors.email && <p className="text-red-500">{errors.email.message?.toString()}</p>}
-      <Button size="sm" className="rounded bg-blue-500 text-white">
-        Subscribe
-      </Button>
+      {errors.email && <Alert color="red">{errors.email?.message}</Alert>}
+      <Button type="submit">Subscribe</Button>
     </form>
   );
 };
-
-export default NewsletterForm;

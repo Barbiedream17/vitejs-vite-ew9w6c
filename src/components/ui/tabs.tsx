@@ -1,17 +1,12 @@
-import { Tabs as MantineTabs, TabsProps, TabsListProps, TabProps, TabPanelProps } from '@mantine/core';
+import { Tabs, TabsProps, TabsPanelProps } from '@mantine/core';
 
-export function Tabs(props: TabsProps) {
-  return <MantineTabs {...props} />;
-}
+export interface CustomTabsProps extends TabsProps {}
+export interface CustomTabsPanelProps extends TabsPanelProps {}
 
-export function TabsList(props: TabsListProps) {
-  return <MantineTabs.List {...props} />;
-}
+export const CustomTabs: React.FC<CustomTabsProps> = (props) => {
+  return <Tabs {...props} />;
+};
 
-export function TabsTrigger(props: TabProps) {
-  return <MantineTabs.Tab {...props} />;
-}
-
-export function TabsContent(props: TabPanelProps) {
-  return <MantineTabs.Panel {...props} />;
-}
+export const CustomTabsPanel: React.FC<CustomTabsPanelProps> = (props) => {
+  return <Tabs.Panel {...props} />;
+};

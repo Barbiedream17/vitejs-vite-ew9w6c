@@ -1,55 +1,49 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button, TextInput, Alert } from '@mantine/core';
 
-// Define the schema using zod
-const billingSchema = z.object({
-  cardNumber: z.string().min(16, { message: 'Card number must be 16 digits' }),
-  expiryDate: z.string().min(5, { message: 'Expiry date must be MM/YY' }),
-  cvv: z.string().min(3, { message: 'CVV must be at least 3 digits' }),
+const schema = z.object({
+  cardNumber: z.string().min(16, "Card number must be 16 digits"),
+  expiryDate: z.string().min(5, "Expiry date must be in MM/YY format"),
+  cvv: z.string().min(3, "CVV must be 3 digits"),
 });
 
-const BillingInfo: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(billingSchema),
+type FormData = z.infer<typeof schema>;
+
+export const BillingInfo: React.FC = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema)
   });
 
-  const onSubmit = (data: any) => {
-    // Handle form submission
+  const onSubmit = (data: FormData) => {
     console.log(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="billing-info-form p-4 bg-white shadow-md rounded-lg">
-      <Input
-        type="text"
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <TextInput
         {...register('cardNumber')}
         placeholder="Card Number"
-        className="w-full p-2 border rounded mb-2"
+        label="Card Number"
+        className="w-full"
       />
-      {errors.cardNumber && <p className="text-red-500">{errors.cardNumber.message?.toString()}</p>}
-      <Input
-        type="text"
+      {errors.cardNumber && <Alert color="red">{errors.cardNumber?.message}</Alert>}
+      <TextInput
         {...register('expiryDate')}
-        placeholder="MM/YY"
-        className="w-full p-2 border rounded mb-2"
+        placeholder="Expiry Date (MM/YY)"
+        label="Expiry Date"
+        className="w-full"
       />
-      {errors.expiryDate && <p className="text-red-500">{errors.expiryDate.message?.toString()}</p>}
-      <Input
-        type="text"
+      {errors.expiryDate && <Alert color="red">{errors.expiryDate?.message}</Alert>}
+      <TextInput
         {...register('cvv')}
         placeholder="CVV"
-        className="w-full p-2 border rounded mb-2"
+        label="CVV"
+        className="w-full"
       />
-      {errors.cvv && <p className="text-red-500">{errors.cvv.message?.toString()}</p>}
-      <Button type="submit" size="sm" className="rounded bg-blue-500 text-white">
-        Submit
-      </Button>
+      {errors.cvv && <Alert color="red">{errors.cvv?.message}</Alert>}
+      <Button type="submit" size="sm" className="w-full">Submit</Button>
     </form>
   );
 };
-
-export default BillingInfo;

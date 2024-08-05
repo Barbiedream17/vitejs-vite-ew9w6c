@@ -13,6 +13,26 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/mickasmt/next-saas-stripe-starter",
   },
   mailSupport: "support@saas-starter.com",
+  plans: [
+    {
+      id: "basic",
+      name: "Basic",
+      description: "Basic plan description",
+      features: ["Feature 1", "Feature 2", "Feature 3"],
+    },
+    {
+      id: "pro",
+      name: "Pro",
+      description: "Pro plan description",
+      features: ["Feature A", "Feature B", "Feature C"],
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise",
+      description: "Enterprise plan description",
+      features: ["Feature X", "Feature Y", "Feature Z"],
+    },
+  ],
 };
 
 export const footerLinks: SidebarNavItem[] = [

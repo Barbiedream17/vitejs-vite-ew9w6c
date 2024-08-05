@@ -1,53 +1,37 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Button } from '@mantine/core';
 import { siteConfig } from '@/config/site';
 
 interface Plan {
+  id: string;
   name: string;
-  price: string;
+  description: string;
   features: string[];
 }
 
-const PricingCard: React.FC<{ plan: Plan; onSubscribe: () => void }> = ({ plan, onSubscribe }) => (
-  <Card className="shadow-sm p-lg">
-    <CardHeader>
-      <CardTitle>{plan.name}</CardTitle>
-      <p>{plan.price}</p>
-    </CardHeader>
-    <CardContent>
-      <ul>
-        {plan.features.map((feature, index) => (
-          <li key={index} className="flex items-center">
-            <Check className="mr-2 text-green-500" />
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </CardContent>
-    <CardFooter>
-      <Button onClick={onSubscribe} variant="default">
-        Subscribe
-      </Button>
-    </CardFooter>
-  </Card>
-);
-
-const PricingCards: React.FC = () => {
-  const plans: Plan[] = siteConfig.plans;
-
+export const PricingCards: React.FC = () => {
   return (
-    <div className="pricing-cards grid grid-cols-1 md:grid-cols-3 gap-4">
-      {plans.map((plan) => (
-        <PricingCard
-          key={plan.name}
-          plan={plan}
-          onSubscribe={() => alert(`Subscribed to ${plan.name}`)}
-        />
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {siteConfig.plans.map((plan: Plan) => (
+        <Card key={plan.id} className="p-4">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold">{plan.name}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-gray-600">{plan.description}</p>
+            {plan.features.map((feature: string, index: number) => (
+              <div key={index} className="flex items-center space-x-2">
+                <Check className="w-4 h-4 text-green-500" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </CardContent>
+          <CardFooter>
+            <Button className="mt-4">Choose Plan</Button>
+          </CardFooter>
+        </Card>
       ))}
     </div>
   );
 };
-
-export default PricingCards;

@@ -1,5 +1,10 @@
-import type { Icon } from "lucide-react";
 import { Icons } from "@/components/shared/icons";
+
+export type NavLink = {
+  title: string;
+  href: string;
+  disabled?: boolean;
+};
 
 export type NavItem = {
   title: string;
@@ -35,6 +40,14 @@ export type SiteConfig = {
     twitter: string;
     github: string;
   };
+  plans: Plan[]; // Added this line
+};
+
+export type Plan = {
+  id: string;
+  name: string;
+  description: string;
+  features: string[];
 };
 
 export type DocsConfig = {
@@ -117,7 +130,7 @@ export type TestimonialType = {
 
 export type ColumnType = string | boolean | null;
 export type PlansRow = { feature: string; tooltip?: string } & {
-  [key in (typeof plansColumns)[number]]: ColumnType;
+  [key in string]: ColumnType;
 };
 
 export interface Session {

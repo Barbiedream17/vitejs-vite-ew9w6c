@@ -1,9 +1,8 @@
-import React from 'react';
-import { useDeleteAccountModal } from '@/components/modals/delete-account-modal';
+import { useState } from 'react';
 import { Button as MantineButton } from '@mantine/core';
 import { siteConfig } from '@/config/site';
+import { DeleteAccountModal } from '@/components/modals/delete-account-modal';
 
-// Define props for Card components
 interface CardProps {
   children: React.ReactNode;
   className?: string;
@@ -29,7 +28,6 @@ const CardFooter: React.FC<CardProps> = ({ children, className }) => (
   <div className={className}>{children}</div>
 );
 
-// Ensure Button component has correct props
 interface ButtonProps {
   variant: 'destructive';
   onClick: () => void;
@@ -43,11 +41,15 @@ const Button: React.FC<ButtonProps> = ({ variant, onClick, children }) => (
 );
 
 export function DeleteAccountSection() {
-  const { setShowDeleteAccountModal, DeleteAccountModal } = useDeleteAccountModal();
+  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
 
   return (
     <>
-      <DeleteAccountModal />
+      <DeleteAccountModal 
+        opened={showDeleteAccountModal} 
+        onClose={() => setShowDeleteAccountModal(false)}
+        user={{ name: "User Name" }}
+      />
       <Card className="card">
         <CardHeader className="card-header">
           <CardTitle className="card-title">Delete Account</CardTitle>

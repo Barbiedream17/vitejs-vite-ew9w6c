@@ -1,4 +1,3 @@
-import React from 'react';
 import { Skeleton } from '@mantine/core';
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";

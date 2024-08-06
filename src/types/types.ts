@@ -40,7 +40,7 @@ export type SiteConfig = {
     twitter: string;
     github: string;
   };
-  plans: Plan[]; // Added this line
+  plans: Plan[];
 };
 
 export type Plan = {
@@ -91,7 +91,11 @@ export interface User {
   stripePriceId?: string;
 }
 
-export type UserSubscriptionPlan = SubscriptionPlan & {
+export type UserSubscriptionPlan = {
+  id: string;
+  name: string;
+  description: string;
+  features: string[];
   stripeCustomerId?: string;
   stripeSubscriptionId?: string;
   stripePriceId?: string;

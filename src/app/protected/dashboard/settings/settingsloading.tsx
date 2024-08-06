@@ -1,21 +1,25 @@
-import React from 'react';
 import { Stack } from '@mantine/core';
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
 import { CardSkeleton } from "@/components/shared/card-skeleton";
 
-export function SettingsLoading() {
+const SettingsLoading = () => {
   return (
     <DashboardShell>
-      <DashboardHeader
-        heading="Settings"
-        text="Manage account and website settings."
-      />
-      <Stack spacing="md">
+      <DashboardHeader heading="Settings" text="Loading your settings..." />
+      <Stack
+        h={300}
+        bg="var(--mantine-color-body)"
+        align="stretch"
+        justify="center"
+        gap="md"
+      >
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
       </Stack>
     </DashboardShell>
   );
-}
+};
+
+export default SettingsLoading;

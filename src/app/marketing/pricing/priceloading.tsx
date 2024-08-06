@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Stack, Grid, Skeleton } from '@mantine/core';
 import { HeaderSection } from "@/components/shared/header-section";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";

@@ -1,29 +1,46 @@
-import React from 'react';
-import { Button, Text, Container, Title, Paper } from '@mantine/core';
-import { getCurrentUser } from "@/lib/session";
-import { DashboardHeader } from "@/components/dashboard/header";
-import { DashboardShell } from "@/components/dashboard/shell";
-import { EmptyPlaceholder } from "@/components/shared/empty-placeholder";
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { Grid, Container } from '@mantine/core';
+import { getCurrentUser } from '@/lib/session';
+import { DashboardHeader } from '@/components/dashboard/header';
+import InfoCard from '@/components/dashboard/info-card';
+import { DashboardShell } from '@/components/dashboard/shell';
+import TransactionsList from '@/components/dashboard/transactions-list';
 
-export function DashboardPage() {
-  const user = getCurrentUser();
+type User = {
+  role: string;
+  // other properties...
+};
+
+const DashboardPage = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const fetchedUser = await getCurrentUser();
+      if (fetchedUser && 'role' in fetchedUser) {
+        setUser(fetchedUser as User);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  if (!user || user.role !== "ADMIN") {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <DashboardShell>
-      <DashboardHeader
-        heading="Panel"
-        text={`Current Role : ${user?.role} — Change your role in settings.`}
-      />
+      <DashboardHeader heading="Dashboard" text="Your dashboard overview." />
       <Container>
-        <Paper padding="md">
-          <EmptyPlaceholder>
-            <EmptyPlaceholder.Icon name="post" />
-            <Title order={3}>No content created</Title>
-            <Text>You don't have any content yet. Start creating content.</Text>
-            <Button variant="outline">Fake button</Button>
-          </EmptyPlaceholder>
-        </Paper>
+        <Grid>
+          <Grid.Col span={4}><InfoCard /></Grid.Col>
+          <Grid.Col span={8}><TransactionsList /></Grid.Col>
+        </Grid>
       </Container>
     </DashboardShell>
   );
-}
+};
+
+export default DashboardPage;

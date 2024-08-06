@@ -1,4 +1,4 @@
-import { Calendar } from '@/components/ui/calendar.tsx';
+import  Calendar  from '@/components/ui/calendar.tsx';
 
 const CalendarPage = () => {{
   return (

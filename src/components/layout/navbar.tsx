@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, MenuItem } from '@mantine/core';
-import UserAccountNav from './user-account-nav';
+import { UserAccountNav } from '@/components/layout/user-account-nav';
 
 const Navbar: React.FC = () => (
   <nav className="navbar bg-blue-500 text-white p-4">

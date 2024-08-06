@@ -1,16 +1,25 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import mdx from '@mdx-js/rollup';
 import path from 'path';
 
-export default defineConfig({
-  plugins: [react(), mdx()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
+// Use a function to dynamically import @mdx-js/rollup
+async function getConfig() {
+  const mdx = (await import('@mdx-js/rollup')).default;
+
+  return defineConfig({
+    plugins: [
+      react(),
+      mdx(),
+    ],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
     },
-  },
-  css: {
-    postcss: './postcss.config.cjs',
-  },
-});
+    css: {
+      postcss: './postcss.config.cjs',
+    },
+  });
+}
+
+export default getConfig();

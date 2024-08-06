@@ -1,4 +1,4 @@
-import { BlurImage } from '@/components/shared/blur-image.tsx';
+import  BlurImage  from '@/components/shared/blur-image.tsx';
 
 const BlurImagePage = () => {{
   return (

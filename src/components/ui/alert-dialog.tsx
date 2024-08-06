@@ -1,5 +1,9 @@
 import { Dialog, DialogProps } from '@mantine/core';
 
-export const AlertDialog = ({ ...props }: DialogProps) => (
-  <Dialog {...props} />
+interface AlertDialogProps extends DialogProps {
+  opened: boolean;
+}
+
+export const AlertDialog = ({ opened, ...props }: AlertDialogProps) => (
+  <Dialog opened={opened} {...props} />
 );

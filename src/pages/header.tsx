@@ -1,11 +1,11 @@
-import { Header } from '@/components/dashboard/header.tsx';
+import { DashboardHeader } from '@/components/dashboard/header.tsx';
 
-const HeaderPage = () => {{
+const HeaderPage = () => {
   return (
     <div className="p-4">
-      <Header />
+      <DashboardHeader heading="Page Title" />
     </div>
   );
-}};
+};
 
 export default HeaderPage;

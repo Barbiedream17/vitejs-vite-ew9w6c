@@ -1,9 +1,9 @@
-import { DeleteAccount } from '@/components/dashboard/delete-account.tsx';
+import { DeleteAccountSection } from '@/components/dashboard/delete-account.tsx';
 
 const DeleteAccountPage = () => {{
   return (
     <div className="p-4">
-      <DeleteAccount />
+      <DeleteAccountSection />
     </div>
   );
 }};

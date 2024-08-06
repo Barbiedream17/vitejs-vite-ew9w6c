@@ -1,27 +1,18 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
-import AnalyticsPage from './pages/analytics';
 import TailwindIndicatorPage from './pages/tailwind-indicator';
-import AuthorPage from './pages/author';
-import BlogCardPage from './pages/blog-card';
-import BlogHeaderLayoutPage from './pages/blog-header-layout';
-import BlogPostsPage from './pages/blog-posts';
-import MdxCardPage from './pages/mdx-card';
-import DeleteAccountPage from './pages/delete-account';
+import {DeleteAccountSection} from './components/dashboard/delete-account';
 import HeaderPage from './pages/header';
 import InfoCardPage from './pages/info-card';
 import ProjectSwitcherPage from './pages/project-switcher';
 import SectionColumnsPage from './pages/section-columns';
 import TransactionsListPage from './pages/transactions-list';
 import UpgradeCardPage from './pages/upgrade-card';
-import BillingFormButtonPage from './pages/billing-form-button';
-import CustomerPortalButtonPage from './pages/customer-portal-button';
 import NewsletterFormPage from './pages/newsletter-form';
 import UserAuthFormPage from './pages/user-auth-form';
 import UserNameFormPage from './pages/user-name-form';
 import UserRoleFormPage from './pages/user-role-form';
 import DashboardSidebarPage from './pages/dashboard-sidebar';
-import MobileNavPage from './pages/mobile-nav';
 import ModeTogglePage from './pages/mode-toggle';
 import NavbarPage from './pages/navbar';
 import SiteFooterPage from './pages/site-footer';
@@ -93,30 +84,25 @@ import ToggleGroupPage from './pages/toggle-group';
 import TogglePage from './pages/toggle';
 import TooltipPage from './pages/tooltip';
 
+const theme = {
+  primaryColor: 'brand',
+  colors: {
+    brand: [
+      '#F0F0F0', '#D9D9D9', '#BFBFBF', '#A6A6A6', '#8C8C8C', 
+      '#737373', '#595959', '#404040', '#262626', '#0D0D0D'
+    ] as const,
+  },
+};
+
 const App = () => {
   return (
-    <MantineProvider 
-      withGlobalStyles 
-      withNormalizeCSS 
-      theme={{
-        primaryColor: 'brand', // Add primary color setting
-        colors: {
-          brand: ['#f0f', '#f0f', '#f0f', '#f0f', '#f0f', '#f0f', '#f0f', '#f0f', '#f0f', '#f0f'],
-        },
-      }}
-    >
+    <MantineProvider theme={theme} withGlobalClasses>
       <Router>
         <div className="p-4">
           <nav className="mb-4">
-            <Link to="/analytics" className="mr-4 text-blue-500">Analytics</Link>
             <Link to="/tailwind-indicator" className="mr-4 text-blue-500">TailwindIndicator</Link>
-            <Link to="/author" className="mr-4 text-blue-500">Author</Link>
-            <Link to="/blog-card" className="mr-4 text-blue-500">BlogCard</Link>
-            <Link to="/blog-header-layout" className="mr-4 text-blue-500">BlogHeaderLayout</Link>
-            <Link to="/blog-posts" className="mr-4 text-blue-500">BlogPosts</Link>
-            <Link to="/mdx-card" className="mr-4 text-blue-500">MdxCard</Link>
-            <Link to="/mdx-components" className="mr-4 text-blue-500">MdxComponents</Link>
             <Link to="/delete-account" className="mr-4 text-blue-500">DeleteAccount</Link>
+            <Link to="/test" className="mr-4 text-blue-500">Test Page</Link>
             <Link to="/header" className="mr-4 text-blue-500">Header</Link>
             <Link to="/info-card" className="mr-4 text-blue-500">InfoCard</Link>
             <Link to="/project-switcher" className="mr-4 text-blue-500">ProjectSwitcher</Link>
@@ -128,14 +114,11 @@ const App = () => {
             <Link to="/pager" className="mr-4 text-blue-500">Pager</Link>
             <Link to="/search" className="mr-4 text-blue-500">Search</Link>
             <Link to="/sidebar-nav" className="mr-4 text-blue-500">SidebarNav</Link>
-            <Link to="/billing-form-button" className="mr-4 text-blue-500">BillingFormButton</Link>
-            <Link to="/customer-portal-button" className="mr-4 text-blue-500">CustomerPortalButton</Link>
             <Link to="/newsletter-form" className="mr-4 text-blue-500">NewsletterForm</Link>
             <Link to="/user-auth-form" className="mr-4 text-blue-500">UserAuthForm</Link>
             <Link to="/user-name-form" className="mr-4 text-blue-500">UserNameForm</Link>
             <Link to="/user-role-form" className="mr-4 text-blue-500">UserRoleForm</Link>
             <Link to="/dashboard-sidebar" className="mr-4 text-blue-500">DashboardSidebar</Link>
-            <Link to="/mobile-nav" className="mr-4 text-blue-500">MobileNav</Link>
             <Link to="/mode-toggle" className="mr-4 text-blue-500">ModeToggle</Link>
             <Link to="/navbar" className="mr-4 text-blue-500">Navbar</Link>
             <Link to="/site-footer" className="mr-4 text-blue-500">SiteFooter</Link>
@@ -209,28 +192,20 @@ const App = () => {
 
           </nav>
           <Routes>
-            <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/tailwind-indicator" element={<TailwindIndicatorPage />} />
-            <Route path="/author" element={<AuthorPage />} />
-            <Route path="/blog-card" element={<BlogCardPage />} />
-            <Route path="/blog-header-layout" element={<BlogHeaderLayoutPage />} />
-            <Route path="/blog-posts" element={<BlogPostsPage />} />
-            <Route path="/mdx-card" element={<MdxCardPage />} />
-            <Route path="/delete-account" element={<DeleteAccountPage />} />
+            <Route path="/delete-account" element={<DeleteAccountSection />} />
+            <Route path="/test" element={<div><h1>Test Page</h1></div>} />
             <Route path="/header" element={<HeaderPage />} />
             <Route path="/info-card" element={<InfoCardPage />} />
             <Route path="/project-switcher" element={<ProjectSwitcherPage />} />
             <Route path="/section-columns" element={<SectionColumnsPage />} />
             <Route path="/transactions-list" element={<TransactionsListPage />} />
             <Route path="/upgrade-card" element={<UpgradeCardPage />} />
-            <Route path="/billing-form-button" element={<BillingFormButtonPage />} />
-            <Route path="/customer-portal-button" element={<CustomerPortalButtonPage />} />
             <Route path="/newsletter-form" element={<NewsletterFormPage />} />
             <Route path="/user-auth-form" element={<UserAuthFormPage />} />
             <Route path="/user-name-form" element={<UserNameFormPage />} />
             <Route path="/user-role-form" element={<UserRoleFormPage />} />
             <Route path="/dashboard-sidebar" element={<DashboardSidebarPage />} />
-            <Route path="/mobile-nav" element={<MobileNavPage />} />
             <Route path="/mode-toggle" element={<ModeTogglePage />} />
             <Route path="/navbar" element={<NavbarPage />} />
             <Route path="/site-footer" element={<SiteFooterPage />} />

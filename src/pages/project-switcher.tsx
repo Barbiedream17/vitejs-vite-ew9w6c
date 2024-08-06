@@ -1,4 +1,4 @@
-import { ProjectSwitcher } from '@/components/dashboard/project-switcher.tsx';
+import  ProjectSwitcher  from '@/components/dashboard/project-switcher.tsx';
 
 const ProjectSwitcherPage = () => {{
   return (

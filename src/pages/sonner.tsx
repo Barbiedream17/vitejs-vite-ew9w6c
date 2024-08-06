@@ -1,11 +1,11 @@
 import { Sonner } from '@/components/ui/sonner.tsx';
 
-const SonnerPage = () => {{
+const SonnerPage = () => {
   return (
     <div className="p-4">
-      <Sonner />
+      <Sonner toasts={[]} />
     </div>
   );
-}};
+};
 
 export default SonnerPage;

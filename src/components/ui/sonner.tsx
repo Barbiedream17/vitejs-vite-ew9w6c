@@ -5,7 +5,7 @@ type ToasterProps = {
   toasts: Array<NotificationsProps & { message: string }>;
 };
 
-export function Toaster({ toasts }: ToasterProps) {
+export function Sonner({ toasts }: ToasterProps) {
   useEffect(() => {
     toasts.forEach((toast) => {
       showNotification({
